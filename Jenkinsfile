@@ -8,13 +8,14 @@ pipeline {
 
     environment {
         PROJECT_VERSION = '1.5.0-SNAPSHOT'
+        ARTIFACT_ID = 'ExamenMocPGM'
     }
 
     stages {
         stage('Build') {
             steps {
                 bat 'echo Limpiando y compilando el proyecto con Maven'
-                bat 'mvn clean compile'
+                bat 'mvn clean package'
             }
         }
 
@@ -32,7 +33,7 @@ pipeline {
                   if exist versiones rmdir /S /Q versiones
                   echo Se crea el directorio versiones con la última versión de la API
                   mkdir versiones
-                  copy target\\*-${env.PROJECT_VERSION}.jar versiones\\
+                  copy target\\${env.ARTIFACT_ID}-${env.PROJECT_VERSION}.jar versiones\\
                 """
             }
         }
