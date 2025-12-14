@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     tools {
         jdk 'Java21'
         maven 'Maven'
@@ -10,16 +11,9 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/PabloGMOEducastur/ExamenMocPGM.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                bat 'echo Limpiando y compilando el proyecto con Maven...'
+                bat 'echo Limpiando y compilando el proyecto con Maven'
                 bat 'mvn clean compile'
             }
         }
