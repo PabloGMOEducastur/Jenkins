@@ -12,9 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/PabloGMOEducastur/ExamenMocPGM.git'
-
-
+                    url: 'https://github.com/PabloGMOEducastur/ExamenMocPGM.git'
             }
         }
 
@@ -34,27 +32,23 @@ pipeline {
 
         stage('Move jar') {
             steps {
-
-                    bat """
-                      echo Eliminando directorio versiones
-                      if exist versiones rmdir /S /Q versiones
-                      echo Se crea el directorio versiones con la última versión de la API
-                      mkdir versiones
-                      copy target\\*-${env.PROJECT_VERSION}.jar versiones\\
-                   """
-                   }
-
-
+                bat """
+                  echo Eliminando directorio versiones
+                  if exist versiones rmdir /S /Q versiones
+                  echo Se crea el directorio versiones con la última versión de la API
+                  mkdir versiones
+                  copy target\\*-${env.PROJECT_VERSION}.jar versiones\\
+                """
             }
         }
     }
 
     post {
         success {
-            bat echo 'Pipeline completado correctamente.'
+            bat 'echo Pipeline completado correctamente.'
         }
         failure {
-            bat echo 'Ha ocurrido un error durante la ejecución del pipeline.'
+            bat 'echo Ha ocurrido un error durante la ejecución del pipeline.'
         }
     }
 }
